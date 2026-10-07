@@ -58,7 +58,7 @@ Claude:  From your memory: GitHub Actions builds the image and deploys to ECS in
 **1. Install the plugin**
 
 ```bash
-claude plugin marketplace add alphatradeai/octamem-claude-plugin
+claude plugin marketplace add OctaMem/octamem-claude-plugin
 claude plugin install octamem@octamem
 ```
 
@@ -155,7 +155,7 @@ It keeps working. The plugin is the simpler, more secure option for new setups.
 
 - 📧 [support@octamem.com](mailto:support@octamem.com)
 - 🌐 [octamem.com](https://octamem.com)
-- 🐛 Issues: [github.com/alphatradeai/octamem-claude-plugin/issues](https://github.com/alphatradeai/octamem-claude-plugin/issues)
+- 🐛 Issues: [github.com/OctaMem/octamem-claude-plugin/issues](https://github.com/OctaMem/octamem-claude-plugin/issues)
 
 ## 📄 License
 
