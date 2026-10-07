@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "octamem": { "type": "http", "url": "https://mcp.octamem.com/mcp" }
+  }
+}

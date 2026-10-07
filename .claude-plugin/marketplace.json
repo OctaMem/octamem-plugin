@@ -1,0 +1,14 @@
+{
+  "name": "octamem",
+  "owner": { "name": "OctaMem", "email": "support@octamem.com" },
+  "metadata": {
+    "description": "Official OctaMem plugins for Claude Code: long-term memory you own, shared across Claude, ChatGPT, Cursor and the OctaMem apps."
+  },
+  "plugins": [
+    {
+      "name": "octamem",
+      "source": "./plugins/octamem",
+      "description": "Long-term memory for Claude: search and save to your OctaMem memory."
+    }
+  ]
+}
