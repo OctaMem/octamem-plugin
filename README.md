@@ -1,191 +1,171 @@
 <p align="center">
-  <img src="assets/logo.png" alt="OctaMem" width="120" />
+  <img src="assets/logo.png" alt="OctaMem" width="96" />
 </p>
 
-<h1 align="center">OctaMem for Claude Code &amp; Codex</h1>
+<h1 align="center">OctaMem Plugin</h1>
 
 <p align="center">
-  <strong>Long-term memory for Claude — remember once, recall everywhere.</strong>
+  Persistent memory for Claude Code and Codex.
 </p>
 
 <p align="center">
   <a href="https://octamem.com">Website</a> ·
+  <a href="https://octamem.com/docs">Documentation</a> ·
   <a href="https://platform.octamem.com">Dashboard</a> ·
-  <a href="#-quick-start">Quick start</a> ·
-  <a href="#-tools">Tools</a> ·
-  <a href="mailto:support@octamem.com">Support</a>
-</p>
-
-<p align="center">
-  <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" />
-  <img alt="MCP" src="https://img.shields.io/badge/MCP-remote%20server-4B5563" />
-  <img alt="OAuth 2.1" src="https://img.shields.io/badge/auth-OAuth%202.1%20%2B%20PKCE-2563EB" />
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-16A34A" />
+  <a href="https://octamem.com/contact">Support</a>
 </p>
 
 ---
 
-Every Claude Code session starts from zero. You explain your stack, your conventions, your
-decisions — again. **OctaMem gives Claude a persistent memory you own**, so what you teach it today
-is there in every session tomorrow, and in every other tool connected to the same memory.
+## Overview
 
-```text
-You:     Remember that we deploy the backend with GitHub Actions to ECS in eu-west-1.
-Claude:  Saved to your OctaMem memory.
+AI coding assistants start every session without context. Project conventions, architecture
+decisions and personal preferences have to be explained again each time.
 
-— a week later, new session —
+OctaMem gives Claude Code and Codex a persistent memory that you own. Information you save in one
+session is available in later sessions, on other machines, and in every other application connected
+to the same memory, including Claude, ChatGPT, Cursor and the OctaMem web and desktop apps.
 
-You:     How do we deploy the backend?
-Claude:  From your memory: GitHub Actions builds the image and deploys to ECS in eu-west-1.
-```
+This repository contains the official OctaMem plugin and plugin marketplace for Claude Code and
+Codex. The plugin connects to the hosted OctaMem MCP server at `https://mcp.octamem.com/mcp`.
+No local services are required.
 
-## ✨ Why OctaMem
+## Features
 
-- **🧠 Memory that persists** — facts, notes, preferences and decisions survive across sessions,
+- **Persistent memory.** Facts, notes, preferences and decisions are retained across sessions,
   projects and machines.
-- **🔁 One memory, every tool** — the same memory works in Claude Code, Claude.ai, Claude Desktop,
-  ChatGPT, Cursor and the OctaMem web & desktop apps.
-- **🔐 Secure one-click connect** — sign in with your OctaMem account (email, Google, Microsoft or
-  Apple). No API keys to copy, no secrets in config files.
-- **🗂️ You choose the memory** — pick which memory to connect (personal, work, a shared team
-  memory). Keep projects separate by connecting different memories.
-- **👀 Full control** — see every connected app and disconnect it any time from
-  **Settings → Connected apps**. Disconnecting stops access immediately.
-- **⚡ Zero setup** — a hosted remote MCP server. Nothing to run locally.
+- **Shared across tools.** The same memory is available in Claude Code, Codex, Claude, ChatGPT,
+  Cursor and the OctaMem applications.
+- **Secure sign-in.** Connections use OAuth 2.1 with PKCE. There are no API keys to copy or store in
+  configuration files.
+- **Scoped access.** Each connection is limited to the single memory you select when connecting.
+- **User control.** Connected applications can be reviewed and disconnected at any time from the
+  OctaMem dashboard. Access ends immediately when a connection is removed.
 
-## 🚀 Quick start
+## Requirements
 
-**1. Install the plugin**
+- An OctaMem account. You can create one at [platform.octamem.com](https://platform.octamem.com)
+  during the first connection.
+- Claude Code or the Codex CLI or app.
+
+## Installation
+
+### Claude Code
 
 ```bash
 claude plugin marketplace add OctaMem/octamem-plugin
 claude plugin install octamem@octamem
 ```
 
-**2. Connect your memory**
+Start `claude`, run `/mcp`, select `plugin:octamem:octamem` and choose **Authenticate**. Sign in to
+OctaMem in the browser window that opens, select a memory and choose **Allow**.
 
-Start `claude`, run `/mcp`, choose **octamem → Authenticate**. Your browser opens — sign in to
-OctaMem (or create a free account), pick a memory and click **Allow**.
-
-**3. Use it**
-
-Just talk to Claude:
-
-```text
-Remember that I prefer TypeScript and pnpm for new projects.
-What do you remember about our API conventions?
-Which OctaMem memory am I connected to?
-```
-
-> **Prefer no plugin?** Add the server directly:
-> `claude mcp add --transport http octamem https://mcp.octamem.com/mcp`, then `/mcp` → Authenticate.
-
-## 🧩 Codex
-
-The same repo is a Codex plugin marketplace.
-
-**Plugin (Codex app / CLI)**
+### Codex
 
 ```bash
 codex plugin marketplace add OctaMem/octamem-plugin
-```
-
-Then open the **Plugins** directory in Codex, choose the **OctaMem** source, install **OctaMem**, and
-sign in when prompted (pick a memory, click **Allow**).
-
-**Or add the server directly**
-
-```bash
-codex mcp add octamem --url https://mcp.octamem.com/mcp
+codex plugin add octamem@octamem
 codex mcp login octamem
 ```
 
-or in `~/.codex/config.toml`:
+The login command opens a browser window. Sign in to OctaMem, select a memory and choose **Allow**.
+
+### Without the plugin
+
+The MCP server can also be added directly.
+
+Claude Code:
+
+```bash
+claude mcp add --transport http octamem https://mcp.octamem.com/mcp
+```
+
+Codex (`~/.codex/config.toml`):
 
 ```toml
 [mcp_servers.octamem]
 url = "https://mcp.octamem.com/mcp"
 ```
 
-then run `codex mcp login octamem` to sign in.
+Then authenticate with `/mcp` in Claude Code or `codex mcp login octamem` in Codex.
 
-## 🛠 Tools
+## Usage
 
-| Tool | What it does | Access |
-|---|---|---|
-| `search_memory` | Searches your memory for facts, notes and past context relevant to a question | Read-only |
-| `save_memory` | Saves a fact, note or decision so it can be recalled later | Write (never deletes) |
-| `get_memory_info` | Shows which memory is connected and its usage | Read-only |
+Once connected, ask the assistant in plain language. It decides when to read from or write to
+memory.
 
-Claude decides when to use them. To be explicit, say *"check my memory"* or *"save this to OctaMem"*.
+```text
+Remember that we deploy the backend with GitHub Actions to ECS in eu-west-1.
+How do we deploy the backend?
+Which OctaMem memory am I connected to?
+```
 
-## 💡 Use cases
-
-- **Project context** — architecture, deploy steps, environment quirks, "why we did it this way".
-- **Personal preferences** — languages, frameworks, code style, review checklists.
-- **Team knowledge** — connect a shared team memory so everyone's Claude knows the same conventions.
-- **Cross-tool continuity** — save in Claude Code, recall in ChatGPT or the OctaMem app (and back).
-- **Long-running work** — pick up a multi-day task without re-explaining where you left off.
-
-### Make memory automatic in a project
-
-Add this to your project's `CLAUDE.md`:
+To make memory use automatic in a project, add the following to the project's `CLAUDE.md` or
+`AGENTS.md`:
 
 ```markdown
 At the start of a task, search OctaMem for relevant context.
 Save important decisions and conventions to OctaMem.
 ```
 
-## ⚙️ How it works
+## Tools
 
-```text
-Claude Code ──▶ OctaMem MCP server (mcp.octamem.com/mcp) ──▶ your OctaMem memory
-     ▲                       │
-     └── OAuth 2.1 + PKCE ───┘  sign in once at platform.octamem.com, pick a memory, Allow
-```
+| Tool | Description | Access |
+|---|---|---|
+| `search_memory` | Searches the connected memory for facts, notes and context relevant to a query. | Read |
+| `save_memory` | Saves a fact, note or decision so it can be recalled later. | Write (no deletion) |
+| `get_memory_info` | Returns the name and usage of the connected memory. | Read |
 
-1. Claude Code connects to the hosted OctaMem MCP server.
-2. The first time, you sign in to OctaMem in your browser and choose which memory to connect.
-3. Claude Code receives a token for **that memory only** — it can read and save to it, nothing else
-   in your account.
-4. Tokens refresh automatically; disconnect from **Connected apps** to revoke access instantly.
+## How it works
 
-## 🔄 Managing your connection
+1. The assistant connects to the hosted OctaMem MCP server.
+2. On first use, you sign in to OctaMem in the browser and select the memory to connect.
+3. The assistant receives an access token that is valid only for that memory.
+4. Tokens are refreshed automatically. Removing the connection in the OctaMem dashboard revokes
+   access immediately.
 
-| I want to… | Do this |
+## Managing connections
+
+| Task | How |
 |---|---|
-| See what's connected | [platform.octamem.com](https://platform.octamem.com) → Settings → **Connected apps** |
-| Switch to another memory | Disconnect, then `/mcp` → octamem → **Authenticate** and pick another |
-| Use two memories at once | `claude mcp add --transport http octamem-work https://mcp.octamem.com/mcp` (and another name for the second) |
-| Update the plugin | `claude plugin update octamem` |
-| Remove it | `claude plugin uninstall octamem` |
+| View connected applications | [platform.octamem.com](https://platform.octamem.com) → Settings → Connected apps |
+| Switch to a different memory | Disconnect the application, then authenticate again and select another memory |
+| Use two memories in Claude Code | Add the server twice under different names, for example `octamem-work` and `octamem-personal` |
+| Update the plugin | `claude plugin update octamem` or `codex plugin marketplace upgrade` |
+| Remove the plugin | `claude plugin uninstall octamem` or `codex plugin remove octamem@octamem` |
 
-## ❓ FAQ
+## Frequently asked questions
 
-**Is my data private?**
-Your memory belongs to your OctaMem account. A connection can only access the one memory you chose,
-and you can revoke it at any time. Claude never sees your OctaMem password or API keys.
+**Where is my data stored?**
+Your memory is stored in your OctaMem account. A connection can access only the memory you selected,
+and you can revoke it at any time. See the [Privacy Policy](https://octamem.com/legal/privacy) and
+[Security](https://octamem.com/security) pages for details.
 
-**Do I need an OctaMem account?**
-Yes — sign up at [platform.octamem.com](https://platform.octamem.com) during the first connect.
+**Does the assistant see my OctaMem password or API keys?**
+No. Sign-in happens on platform.octamem.com. The assistant receives a scoped token only.
 
-**Does it work outside Claude Code?**
-Yes. The same memory is available in Claude.ai and Claude Desktop (Settings → Connectors),
-ChatGPT, Cursor, and the OctaMem web and desktop apps.
-
-**Claude didn't use my memory — why?**
-Claude chooses when to call tools. Ask explicitly ("check my OctaMem memory") or add the
-`CLAUDE.md` snippet above.
+**The assistant did not use my memory.**
+The assistant decides when to call tools. Ask it explicitly, for example "check my OctaMem memory",
+or add the instructions shown under Usage to your project.
 
 **I already use an OctaMem API key setup.**
-It keeps working. The plugin is the simpler, more secure option for new setups.
+Existing API key setups continue to work. The plugin is the recommended option for new
+installations.
 
-## 🤝 Support
+## Repository structure
 
-- 📧 [support@octamem.com](mailto:support@octamem.com)
-- 🌐 [octamem.com](https://octamem.com)
-- 🐛 Issues: [github.com/OctaMem/octamem-plugin/issues](https://github.com/OctaMem/octamem-plugin/issues)
+```text
+.claude-plugin/marketplace.json     Claude Code marketplace
+.agents/plugins/marketplace.json    Codex marketplace
+plugins/octamem/                    Plugin (Claude Code and Codex manifests, MCP configuration)
+```
 
-## 📄 License
+## Support
 
-[MIT](LICENSE) © OctaMem
+- Email: [support@octamem.com](mailto:support@octamem.com)
+- Contact: [octamem.com/contact](https://octamem.com/contact)
+- Issues: [github.com/OctaMem/octamem-plugin/issues](https://github.com/OctaMem/octamem-plugin/issues)
+
+## License
+
+Released under the [MIT License](LICENSE).
