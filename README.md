@@ -2,7 +2,7 @@
   <img src="assets/logo.png" alt="OctaMem" width="120" />
 </p>
 
-<h1 align="center">OctaMem for Claude Code</h1>
+<h1 align="center">OctaMem for Claude Code &amp; Codex</h1>
 
 <p align="center">
   <strong>Long-term memory for Claude — remember once, recall everywhere.</strong>
@@ -58,7 +58,7 @@ Claude:  From your memory: GitHub Actions builds the image and deploys to ECS in
 **1. Install the plugin**
 
 ```bash
-claude plugin marketplace add OctaMem/octamem-claude-plugin
+claude plugin marketplace add OctaMem/octamem-plugin
 claude plugin install octamem@octamem
 ```
 
@@ -79,6 +79,35 @@ Which OctaMem memory am I connected to?
 
 > **Prefer no plugin?** Add the server directly:
 > `claude mcp add --transport http octamem https://mcp.octamem.com/mcp`, then `/mcp` → Authenticate.
+
+## 🧩 Codex
+
+The same repo is a Codex plugin marketplace.
+
+**Plugin (Codex app / CLI)**
+
+```bash
+codex plugin marketplace add OctaMem/octamem-plugin
+```
+
+Then open the **Plugins** directory in Codex, choose the **OctaMem** source, install **OctaMem**, and
+sign in when prompted (pick a memory, click **Allow**).
+
+**Or add the server directly**
+
+```bash
+codex mcp add octamem --url https://mcp.octamem.com/mcp
+codex mcp login octamem
+```
+
+or in `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.octamem]
+url = "https://mcp.octamem.com/mcp"
+```
+
+then run `codex mcp login octamem` to sign in.
 
 ## 🛠 Tools
 
@@ -155,7 +184,7 @@ It keeps working. The plugin is the simpler, more secure option for new setups.
 
 - 📧 [support@octamem.com](mailto:support@octamem.com)
 - 🌐 [octamem.com](https://octamem.com)
-- 🐛 Issues: [github.com/OctaMem/octamem-claude-plugin/issues](https://github.com/OctaMem/octamem-claude-plugin/issues)
+- 🐛 Issues: [github.com/OctaMem/octamem-plugin/issues](https://github.com/OctaMem/octamem-plugin/issues)
 
 ## 📄 License
 
