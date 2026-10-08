@@ -1,0 +1,20 @@
+{
+  "name": "octamem",
+  "interface": {
+    "displayName": "OctaMem"
+  },
+  "plugins": [
+    {
+      "name": "octamem",
+      "source": {
+        "source": "local",
+        "path": "./plugins/octamem"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
